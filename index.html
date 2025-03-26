@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            color: #333;
+        }
+        .pdf-container {
+            width: 100%;
+            max-width: 800px;
+            height: 80vh;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+        .error-message {
+            color: red;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your PDF</h1>
+    <div id="pdfContainer" class="pdf-container"></div>
+
+    <script>
+        // Get the PDF URL from the query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const pdfUrl = urlParams.get('pdf');
+
+        // Get the container element
+        const pdfContainer = document.getElementById('pdfContainer');
+
+        // Check if the PDF URL exists
+        if (pdfUrl) {
+            // Create an embed element to display the PDF
+            const embed = document.createElement('embed');
+            embed.src = pdfUrl;
+            embed.type = 'application/pdf';
+            embed.width = '100%';
+            embed.height = '100%';
+            pdfContainer.appendChild(embed);
+        } else {
+            // Display an error message if no PDF URL is provided
+            pdfContainer.innerHTML = '<p class="error-message">Error: No PDF URL provided.</p>';
+        }
+    </script>
+</body>
+</html>
